@@ -171,7 +171,7 @@ def desactivar_usuario(
 ):
     """
     Desactiva a un usuario (Soft Delete).
-    Regla 7: Se verifica integridad referencial impidiendo la eliminación si tiene préstamos activos.
+     Se verifica integridad referencial impidiendo la eliminación si tiene préstamos activos.
     """
     usuario = session.get(Usuario, usuario_id)
     if not usuario or not usuario.is_active:

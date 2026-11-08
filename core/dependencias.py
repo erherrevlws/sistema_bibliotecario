@@ -36,7 +36,7 @@ def get_current_user(
     return usuario
 
 def require_roles(roles_permitidos: list[str]):
-    """Verifica si el usuario autenticado posee uno de los roles autorizados (RBAC)."""
+    """Verifica si el usuario autenticado posee uno de los roles autorizados."""
     def role_checker(
         usuario_actual: Usuario = Depends(get_current_user),
         session: Session = Depends(get_session)

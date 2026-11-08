@@ -20,7 +20,7 @@ def login(
         headers={"WWW-Authenticate": "Bearer"},
     )
     
-    # Regla 5: Las credenciales incorrectas no deben revelar si el usuario existe ni exponer información sensible
+    # Las credenciales incorrectas no deben revelar si el usuario existe ni exponer información sensible
     statement = select(Usuario).where(Usuario.email == form_data.username, Usuario.is_active == True)
     usuario = session.exec(statement).first()
     

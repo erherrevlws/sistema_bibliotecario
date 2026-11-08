@@ -18,10 +18,8 @@ def crear_prestamo(
 ):
     """
     Registra un préstamo bibliotecario aplicando las reglas de negocio.
-    - Regla 1 (Caso 8): Impide prestar un libro no disponible.
-    - Caso 7: Registra el préstamo y actualiza libro.disponible = False.
     """
-    # 1. Determinar el usuario del préstamo
+    #  Determinar el usuario del préstamo
     rol_actual = session.get(Rol, current_user.rol_id)
     rol_nombre = rol_actual.nombre if rol_actual else "Usuario"
 
@@ -38,7 +36,7 @@ def crear_prestamo(
             detail="El usuario destinatario del préstamo no existe o se encuentra inactivo"
         )
 
-    # 2. Validar existencia del libro
+    #  Validar existencia del libro
     libro = session.get(Libro, prestamo_in.libro_id)
     if not libro or not libro.is_active:
         raise HTTPException(
@@ -46,19 +44,19 @@ def crear_prestamo(
             detail="El libro solicitado no existe en el catálogo activo"
         )
 
-    # 3. Regla 1: Validar disponibilidad
+    #  Validar disponibilidad
     if not libro.disponible:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="El libro solicitado no se encuentra disponible para préstamo"
         )
 
-    # 4. Calcular fechas
+    #  Calcular fechas
     dias = prestamo_in.dias_prestamo if prestamo_in.dias_prestamo else 14
     hoy = date.today()
     fecha_esperada = hoy + timedelta(days=dias)
 
-    # 5. Crear el registro de préstamo y actualizar disponibilidad del libro
+    #  Crear el registro de préstamo y actualizar disponibilidad del libro
     nuevo_prestamo = Prestamo(
         usuario_id=target_usuario_id,
         libro_id=libro.id,
@@ -149,7 +147,7 @@ def registrar_devolucion(
 ):
     """
     Registra la devolución de un libro prestado.
-    - Regla 3 (Caso 9): El libro vuelve a estar disponible (disponible = True).
+    - El libro vuelve a estar disponible .
     - El préstamo pasa a estado 'DEVUELTO' con su fecha real de entrega.
     """
     prestamo = session.get(Prestamo, prestamo_id)
@@ -176,7 +174,7 @@ def registrar_devolucion(
     prestamo.estado = "DEVUELTO"
     prestamo.fecha_devolucion_real = date.today()
 
-    # Regla de negocio 3: El libro vuelve a estar disponible
+    # El libro vuelve a estar disponible
     libro.disponible = True
 
     session.add(prestamo)

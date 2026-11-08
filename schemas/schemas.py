@@ -3,7 +3,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import date
 
-# ----------------- AUTENTICACIÓN -----------------
+# AUTENTICACIÓN
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -12,7 +12,7 @@ class TokenData(BaseModel):
     email: Optional[str] = None
     rol: Optional[str] = None
 
-# ----------------- ROLES -----------------
+#  ROLES 
 class RolRead(BaseModel):
     id: int
     nombre: str
@@ -20,7 +20,7 @@ class RolRead(BaseModel):
     class Config:
         from_attributes = True
 
-# ----------------- USUARIOS -----------------
+# USUARIOS 
 class UsuarioCreate(BaseModel):
     nombre: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
@@ -45,7 +45,7 @@ class UsuarioRead(BaseModel):
     class Config:
         from_attributes = True
 
-# ----------------- AUTORES -----------------
+#  AUTORES 
 class AutorCreate(BaseModel):
     nombre: str = Field(..., min_length=2, max_length=100)
     nacionalidad: Optional[str] = Field(None, max_length=100)
@@ -68,7 +68,7 @@ class AutorRead(BaseModel):
     class Config:
         from_attributes = True
 
-# ----------------- CATEGORÍAS -----------------
+#  CATEGORÍAS 
 class CategoriaCreate(BaseModel):
     nombre: str = Field(..., min_length=2, max_length=100)
     descripcion: Optional[str] = None
@@ -85,7 +85,7 @@ class CategoriaRead(BaseModel):
     class Config:
         from_attributes = True
 
-# ----------------- LIBROS -----------------
+# LIBROS 
 class LibroCreate(BaseModel):
     titulo: str = Field(..., min_length=1, max_length=200)
     isbn: str = Field(..., min_length=5, max_length=30)
@@ -113,7 +113,7 @@ class LibroRead(BaseModel):
     class Config:
         from_attributes = True
 
-# ----------------- PRÉSTAMOS -----------------
+#  PRÉSTAMOS 
 class PrestamoCreate(BaseModel):
     libro_id: int
     usuario_id: Optional[int] = None  # Si lo crea el bibliotecario/admin puede especificarlo; si es usuario regular, toma el suyo

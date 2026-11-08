@@ -41,7 +41,7 @@ def seed_initial_data():
                 ))
         session.commit()
 
-        # 3. Categorías iniciales
+        # Categorías iniciales
         categorias_seed = [
             ("Tecnología e Informática", "Libros técnicos de desarrollo y software"),
             ("Literatura Latinoamericana", "Obras destacadas de narrativa iberoamericana")
@@ -56,7 +56,7 @@ def seed_initial_data():
                 session.refresh(cat)
             cat_map[cat_nombre] = cat
 
-        # 4. Autores iniciales
+        #  Autores iniciales
         autores_seed = [
             ("Gabriel García Márquez", "Colombiana", date(1927, 3, 6), "Premio Nobel de Literatura 1982"),
             ("Robert C. Martin", "Estadounidense", date(1952, 12, 5), "Conocido como Uncle Bob, referente en Clean Code")
@@ -71,7 +71,7 @@ def seed_initial_data():
                 session.refresh(autor)
             autor_map[aut_nom] = autor
 
-        # 5. Libros iniciales
+        #  Libros iniciales
         libros_seed = [
             ("Cien Años de Soledad", "978-0307474728", autor_map["Gabriel García Márquez"].id, cat_map["Literatura Latinoamericana"].id),
             ("Clean Code: A Handbook of Agile Software Craftsmanship", "978-0132350884", autor_map["Robert C. Martin"].id, cat_map["Tecnología e Informática"].id)
@@ -118,6 +118,5 @@ def root():
     return {
         "sistema": "API REST Sistema Bibliotecario",
         "estado": "En línea",
-        "documentacion_swagger": "/docs",
-        "documentacion_redoc": "/redoc"
+        
     }
