@@ -1,9 +1,9 @@
-fastapi
-uvicorn
-sqlmodel
-pymysql
+fastapi #framework encargado de definir rutas
+uvicorn #servidor que escucha peticiones al puerto 8000
+sqlmodel #orm utilizado
+pymysql #driver o conector a la base de datps
 python-jose[cryptography]
-bcrypt
-python-multipart
-python-dotenv
-httpx
+bcrypt #para incriptar contraseñas
+python-multipart #para procesar formularios
+python-dotenv #leer archivo .env
+httpx #cliente http asincrono

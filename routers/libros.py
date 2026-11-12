@@ -157,8 +157,8 @@ def eliminar_libro(
     current_user: Usuario = Depends(require_roles(["Administrador", "Bibliotecario"]))
 ):
     """
-    Elimina un libro del catálogo mediante Soft Delete (is_active = False).
-    Regla 7: Impide la eliminación si el libro tiene un préstamo activo en curso.
+    Elimina un libro del catálogo mediante Soft Delete is_active = False.
+    Impide la eliminación si el libro tiene un préstamo activo en curso.
     """
     libro = session.get(Libro, libro_id)
     if not libro or not libro.is_active:
